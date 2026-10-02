@@ -1,0 +1,9 @@
+[
+  {"order_id": "ORD-1001", "customer_email": "asha.n@example.com", "category": "apparel", "amount_inr": 2999, "status": "delivered", "delivered_days_ago": 2, "refunded": false},
+  {"order_id": "ORD-1002", "customer_email": "ravi.k@example.com", "category": "apparel", "amount_inr": 1499, "status": "delivered", "delivered_days_ago": 5, "refunded": false},
+  {"order_id": "ORD-1003", "customer_email": "meera.s@example.com", "category": "electronics", "amount_inr": 24999, "status": "delivered", "delivered_days_ago": 3, "refunded": false},
+  {"order_id": "ORD-1004", "customer_email": "john.d@example.com", "category": "books", "amount_inr": 799, "status": "delivered", "delivered_days_ago": 45, "refunded": false},
+  {"order_id": "ORD-1005", "customer_email": "priya.r@example.com", "category": "electronics", "amount_inr": 8999, "status": "delivered", "delivered_days_ago": 12, "refunded": false},
+  {"order_id": "ORD-1006", "customer_email": "arjun.m@example.com", "category": "home", "amount_inr": 3499, "status": "in_transit", "delivered_days_ago": null, "refunded": false},
+  {"order_id": "ORD-1007", "customer_email": "kavya.p@example.com", "category": "apparel", "amount_inr": 999, "status": "delivered", "delivered_days_ago": 4, "refunded": true}
+]

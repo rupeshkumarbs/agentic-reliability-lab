@@ -1,0 +1,60 @@
+name: eval-gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: "reference (offline) or anthropic (live Claude, uses ANTHROPIC_API_KEY)"
+        default: reference
+        type: choice
+        options: [reference, anthropic]
+
+permissions:
+  contents: read
+
+env:
+  CANDIDATE: agents/support-v3.json # the agent version this branch wants to ship
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -t . -v
+
+  release-gate:
+    needs: unit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Gate the release candidate against the baseline
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python -m arl.evals --agent "$CANDIDATE" \
+            --provider "${{ inputs.provider || 'reference' }}" \
+            --baseline evals/baselines/support.json --out out
+      - name: The known-bad v2 must stay blocked (guards the gate itself)
+        run: |
+          if python -m arl.evals --agent agents/support-v2.json --baseline evals/baselines/support.json --out out/v2; then
+            echo "::error::v2 passed the gate - the injection eval has stopped working"; exit 1
+          fi
+      - name: Scorecard to job summary
+        if: always()
+        run: cat out/scorecard-*.md >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scorecards-and-traces
+          path: out/

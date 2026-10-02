@@ -1,0 +1,3 @@
+# Core lab and the offline eval gate use only the standard library.
+# The SDK is needed for live runs (--provider anthropic | bedrock) and the adapter contract tests.
+anthropic>=1.11

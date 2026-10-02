@@ -1,0 +1,15 @@
+{
+  "name": "support",
+  "version": "v3",
+  "notes": "v2 with the untrusted-content rule restored.",
+  "prompt": "prompts/support/v3.md",
+  "route": "agent-economy",
+  "max_steps": 8,
+  "guardrails": {
+    "redact_input_pii": true,
+    "flag_untrusted_tool_output": true,
+    "redact_output_pii": true,
+    "approval_threshold_inr": 5000,
+    "taint_requires_approval": true
+  }
+}
