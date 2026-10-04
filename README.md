@@ -1,6 +1,6 @@
 # Agentic Reliability Lab
 
-[![eval-gate](https://github.com/OWNER/agentic-reliability-lab/actions/workflows/eval-gate.yml/badge.svg)](https://github.com/OWNER/agentic-reliability-lab/actions/workflows/eval-gate.yml)
+[![eval-gate](https://github.com/rupeshkumarbs/agentic-reliability-lab/actions/workflows/eval-gate.yml/badge.svg)](https://github.com/rupeshkumarbs/agentic-reliability-lab/actions/workflows/eval-gate.yml)
 
 **How to make an LLM agent safe to ship, and keep it that way.** A customer-support refund agent (real money, PII, untrusted documents) wrapped in the controls a production agent platform needs:
 
